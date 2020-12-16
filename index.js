@@ -22,5 +22,11 @@ app.use((req,res,next)=>{
     res.send('<h1> 404 ERROR </h1>')
 })
 
-app.listen(8001)
+const mongo = require('./util/database').mongo_connect;
+
+mongo( () => {
+    app.listen(8001)
+})
+
+// app.listen(8001)
 console.log('NodeJS is running')
