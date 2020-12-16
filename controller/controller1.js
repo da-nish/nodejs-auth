@@ -12,6 +12,7 @@ exports.about = (req, res, next) =>{
 }
 
 exports.profile = (req, res, next) =>{
+    if(!req.session.isAuth) res.redirect('/')
     res.render('profile', {pageTitle:'Profile', isAuth:req.session.isAuth, user: req.session.c_user ,path:'/profile'})
 }
 
