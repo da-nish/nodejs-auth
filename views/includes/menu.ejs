@@ -7,8 +7,12 @@
 
     
     <div class="right menu">
-      <a class="ui item <%= path=='/signup'?'active':'' %>" href="signup">Sign Up</a>
-      <a class="ui item <%= path=='/login'?'active':'' %>" href="login">Login</a>
-      <a class="ui item <%= path=='/profile'?'active':'' %>" href="profile">Profile</a>
-    </div>
+      <% if(isAuth===true){ %>
+        <a class="ui item <%= path=='/profile'?'active':'' %>" href="/profile">Profile</a>
+        <a class="ui item" href="/logout">Logout</a>
+      <%} else{%>
+        <a class="ui item <%= path=='/signup'?'active':'' %>" href="/signup">Sign Up</a>
+        <a class="ui item <%= path=='/login'?'active':'' %>" href="/login">Login</a>  
+      <%}%>
+     </div>
   </div></div>
