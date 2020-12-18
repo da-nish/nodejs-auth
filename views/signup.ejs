@@ -7,6 +7,20 @@
     <div class="ui segment">
         <h2 class="ui header"><%= pageTitle %></h2>
 
+        
+        <% if (formErr !="") { %>
+          <div class="ui warning message">
+            <div class="header"> <%= formErr%> </div>
+          </div>
+        <%}%>
+
+        <% if (formSucc !="") { %>
+          <div class="ui success message">
+            <div class="header"> <%= formSucc%> </div>
+          </div>
+        <%}%>
+
+
         <form class="ui form" action="/signup" method="POST">
           
             <div class="field">
@@ -16,6 +30,8 @@
             <div class="field">
               <label>Email</label>
               <input type="text" name="email" placeholder="Email">
+              
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             </div>
             <div class="field">
               <label>Password</label>

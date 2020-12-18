@@ -2,10 +2,11 @@ const express = require('express')
 const userContoller = require('../controller/controller1')
 const route = express.Router();
 
+const isAuth = require('../middleware/is-auth') 
 
 route.get('/', userContoller.home)
-route.get('/about', userContoller.about)
-route.get('/profile', userContoller.profile)
+route.get('/about', isAuth ,userContoller.about)
+route.get('/profile', isAuth ,userContoller.profile) //using isAuth to required login
 
 route.get('/login', userContoller.getLogin)
 route.post('/login', userContoller.postLogin)

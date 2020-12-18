@@ -5,6 +5,8 @@ const mongooes = require('mongoose')
 const app = express();
 const session = require('express-session')
 const mongodb_session = require('connect-mongodb-session')(session)
+const csrf = require('csurf')
+const flash = require('connect-flash')
 
 //setting default template engine and template folder name
 app.set('view engine', 'ejs')
@@ -19,10 +21,24 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname, 'public')));
 //static file serve: css, js
 
-
 const session_store = new mongodb_session({uri:db_url, collection: 'session_data'})//storing sesion in mongodb
 
 app.use(session({secret:'secrect string', store:session_store, saveUninitialized: true,resave: false, cookie: { maxAge: 60000 }}))
+
+//using flash
+app.use(flash())
+
+const csrfProtect = csrf()
+app.use(csrfProtect)
+
+
+//passing values to every response
+// app.use((req, res, next) => {
+//     res.locals.isAuthenticated = req.session.isAuth;
+//     res.locals.csrfToken = req.csrfToken();
+//     next()
+// })
+
 //ROUTER
 app.use(userRoute)
 app.use((req,res,next)=>{
