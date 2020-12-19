@@ -15,6 +15,8 @@ const userSchema = schema({
         type:String,
         required: true
     },
+    reset_pass_token: String,
+    reset_token_expiry: Date,
 });
 const User = mongooes.model('User', userSchema);
 module.exports = User

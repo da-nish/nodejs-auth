@@ -17,10 +17,11 @@
             <div class="header"> <%= formSucc%> </div>
           </div>
         <%}%>
+        <!-- login form -->
         <form class="ui form" action="/login" method="POST">
             <div class="field">
               <label>Email</label>
-              <input type="text" name="email" placeholder="Email">
+              <input type="text" name="email"  value="<%= oldInput.email%>" placeholder="Email">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             </div>
             <div class="field">
@@ -31,6 +32,31 @@
             <button class="ui button" type="submit">Login</button>
           </form>
         
+          <div class="ui divider"></div>
+
+            <% if (reset_err !="") { %>
+              <div class="ui warning message">
+                <div class="header"> <%= reset_err%> </div>
+              </div>
+            <%}%>
+    
+            <% if (reset_succ !="") { %>
+              <div class="ui success message">
+                <div class="header"> <%= reset_succ%> </div>
+              </div>
+            <%}%>
+            
+        <h4 class="ui header">Reset Password</h4>
+              <!-- reset password -->
+            <form class="ui form" action="/reset" method="POST">
+                <div class="field">
+                  <label>Email</label>
+                  <input type="text" name="email" placeholder="Email">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                </div>
+                <button class="ui button" type="submit">Reset</button>
+              </form>
+            
     </div>
 
 </body>  
